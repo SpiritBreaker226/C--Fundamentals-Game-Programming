@@ -1,7 +1,10 @@
-#include <cstdio>
+#include "raylib.h"
 
 int main(int argc, const char** argv) {
-  printf("Axe Game");
+  int width = 350;
+
+  // create a window
+  InitWindow(width, 900, "Jason Stathopulos");
 
   return 0;
 }
