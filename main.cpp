@@ -2,9 +2,23 @@
 
 int main(int argc, const char **argv)
 {
-  float root_beer = 1.99;
-  double cheese_burger{5.99};
-  bool should_have_lunch{};
+  // false
+  bool equal{4 == 9};
+
+  // true
+  bool not_equal{4 != 9};
+
+  // true
+  bool less{4 < 9};
+
+  // false
+  bool greater{4 > 9};
+
+  // true
+  bool lest_equal{4 <= 9};
+
+  // false
+  bool greater_equal{4 >= 9};
 
   int width = 350;
 
