@@ -14,8 +14,10 @@ int main()
   Texture2D scarfy = LoadTexture("./textures/scarfy.png");
   Rectangle scarfyRec;
 
+  const int scarfyFrames = 6;
+
   // init scarfyRec
-  scarfyRec.width = scarfy.width / 6;
+  scarfyRec.width = scarfy.width / scarfyFrames;
   scarfyRec.height = scarfy.height;
   scarfyRec.x = 0;
   scarfyRec.y = 0;
@@ -23,6 +25,13 @@ int main()
   Vector2 scarfyPos;
   scarfyPos.x = windowWidth / 2 - scarfyRec.width / 2;
   scarfyPos.y = windowHeight - scarfyRec.height;
+
+  // animation frame
+  int frame{};
+
+  // amount of time before we update the animation frame
+  const float updateTime{1.0 / 12.0};
+  float runningTime{};
 
   // checks if the rectangle
   bool isInAir{};
@@ -70,6 +79,23 @@ int main()
     }
 
     scarfyPos.y += velocity * dT;
+
+    // update running time
+    runningTime += dT;
+
+    if (runningTime >= updateTime)
+    {
+      runningTime = 0.0;
+
+      // update animation frame
+      scarfyRec.x = frame * scarfyRec.width;
+      frame++;
+
+      if (frame > scarfyFrames - 1)
+      {
+        frame = 0;
+      }
+    }
 
     DrawTextureRec(scarfy, scarfyRec, scarfyPos, WHITE);
 
