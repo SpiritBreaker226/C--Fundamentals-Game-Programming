@@ -36,13 +36,13 @@ int main()
     // add boundary on the right side
     if (IsKeyDown(KEY_D) && circle_x < width)
     {
-      circle_x = circle_x + 10;
+      circle_x += 10;
     }
 
     // add boundary on the left side
     if (IsKeyDown(KEY_A) && circle_x > 0)
     {
-      circle_x = circle_x - 10;
+      circle_x -= 10;
     }
 
     // Game Logic Ends
