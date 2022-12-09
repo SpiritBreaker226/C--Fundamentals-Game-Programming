@@ -7,14 +7,14 @@ int main()
   // create a window
   InitWindow(width, 900, "Jason Stathopulos");
 
-  while (true)
+  while (WindowShouldClose() == false)
   {
     // init the drawing to the window
     BeginDrawing();
 
     // clears the background to prevent flickering,
     // and want to avoid causing sizes.
-    ClearBackground(RED);
+    ClearBackground(WHITE);
 
     // treadown the window
     EndDrawing();
