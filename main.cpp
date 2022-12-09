@@ -17,6 +17,8 @@ int main()
   int axe_x{400};
   int axe_y{0};
 
+  int direction{10};
+
   // sets the target Frames per second (FPS)
   SetTargetFPS(60);
   while (WindowShouldClose() == false)
@@ -32,6 +34,16 @@ int main()
 
     DrawCircle(circle_x, circle_y, 25, BLUE);
     DrawRectangle(axe_x, axe_y, 50, 50, RED);
+
+    // move the axe
+    axe_y += direction;
+
+    if (axe_y > height || axe_y < 0)
+    {
+      // reverse the number so
+      // plus become minus and minus becomes plus
+      direction = -direction;
+    }
 
     // add boundary on the right side
     if (IsKeyDown(KEY_D) && circle_x < width)
