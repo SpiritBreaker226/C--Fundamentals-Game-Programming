@@ -46,29 +46,38 @@ int main()
 
     // Game Logic Begins
 
-    DrawCircle(circle_x, circle_y, circle_radius, BLUE);
-    DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
+    bool collision_with_axe{false};
 
-    // move the axe
-    axe_y += direction;
-
-    if (axe_y > height || axe_y < 0)
+    if (collision_with_axe)
     {
-      // reverse the number so
-      // plus become minus and minus becomes plus
-      direction = -direction;
+      DrawText("Game Over!", 400, 200, 20, RED);
     }
-
-    // add boundary on the right side
-    if (IsKeyDown(KEY_D) && r_circle_x < width)
+    else
     {
-      circle_x += 10;
-    }
+      DrawCircle(circle_x, circle_y, circle_radius, BLUE);
+      DrawRectangle(axe_x, axe_y, axe_length, axe_length, RED);
 
-    // add boundary on the left side
-    if (IsKeyDown(KEY_A) && l_circle_x > 0)
-    {
-      circle_x -= 10;
+      // move the axe
+      axe_y += direction;
+
+      if (axe_y > height || axe_y < 0)
+      {
+        // reverse the number so
+        // plus become minus and minus becomes plus
+        direction = -direction;
+      }
+
+      // add boundary on the right side
+      if (IsKeyDown(KEY_D) && r_circle_x < width)
+      {
+        circle_x += 10;
+      }
+
+      // add boundary on the left side
+      if (IsKeyDown(KEY_A) && l_circle_x > 0)
+      {
+        circle_x -= 10;
+      }
     }
 
     // Game Logic Ends
