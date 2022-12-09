@@ -13,6 +13,8 @@ int main()
   int circle_x{width / 2};
   int circle_y{height / 2};
 
+  // sets the target Frames per second (FPS)
+  SetTargetFPS(60);
   while (WindowShouldClose() == false)
   {
     // init the drawing to the window
@@ -25,6 +27,16 @@ int main()
     // Game Logic Begins
 
     DrawCircle(circle_x, circle_y, 25, BLUE);
+
+    if (IsKeyDown(KEY_D))
+    {
+      circle_x = circle_x + 10;
+    }
+
+    if (IsKeyDown(KEY_A))
+    {
+      circle_x = circle_x - 10;
+    }
 
     // Game Logic Ends
 
