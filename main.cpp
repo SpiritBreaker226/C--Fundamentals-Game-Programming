@@ -27,6 +27,7 @@ int main()
     // Game Logic Begins
 
     DrawCircle(circle_x, circle_y, 25, BLUE);
+    DrawRectangle(300, 0, 50, 50, RED);
 
     // add boundary on the right side
     if (IsKeyDown(KEY_D) && circle_x < width)
