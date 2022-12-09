@@ -2,10 +2,11 @@
 
 int main()
 {
-  int width = 350;
+  int width{350};
+  int height{900};
 
   // create a window
-  InitWindow(width, 900, "Jason Stathopulos");
+  InitWindow(width, height, "Jason Stathopulos");
 
   while (WindowShouldClose() == false)
   {
@@ -15,6 +16,8 @@ int main()
     // clears the background to prevent flickering,
     // and want to avoid causing sizes.
     ClearBackground(WHITE);
+
+    DrawCircle(width / 2, height / 2, 25, BLUE);
 
     // treadown the window
     EndDrawing();
