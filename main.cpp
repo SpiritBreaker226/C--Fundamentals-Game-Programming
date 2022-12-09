@@ -18,6 +18,9 @@ int main()
   // checks if the rectangle
   bool isInAir{};
 
+  // jump velocity
+  const int jumpVel{-22};
+
   // places the rectangle on the ground
   int posY{windowHeight - height};
   int velocity{0};
@@ -49,9 +52,10 @@ int main()
       velocity += gravity;
     }
 
+    // jump check
     if (IsKeyPressed(KEY_SPACE) && !isInAir)
     {
-      velocity -= 10;
+      velocity += jumpVel;
     }
 
     posY += velocity;
