@@ -9,6 +9,23 @@ struct AnimData
   float runningTime;
 };
 
+float renderBackground(Texture2D background, float deltaTime, float bgX, int bgVector)
+{
+  bgX -= bgVector * deltaTime;
+
+  if (bgX <= -background.width * 2)
+  {
+    bgX = 0.0;
+  }
+
+  Vector2 bg1Pos{bgX, 0.0};
+  DrawTextureEx(background, bg1Pos, 0.0, 2.0, WHITE);
+  Vector2 bg2Pos{bgX + background.width * 2, 0.0};
+  DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
+
+  return bgX;
+}
+
 bool isOnGround(AnimData data, int windowHeight)
 {
   return data.pos.y >= (windowHeight - data.rec.height);
@@ -121,41 +138,9 @@ int main()
 
     // Start Game Logic
 
-    bgX -= 20 * dT;
-
-    if (bgX <= -background.width * 2)
-    {
-      bgX = 0.0;
-    }
-
-    Vector2 bg1Pos{bgX, 0.0};
-    DrawTextureEx(background, bg1Pos, 0.0, 2.0, WHITE);
-    Vector2 bg2Pos{bgX + background.width * 2, 0.0};
-    DrawTextureEx(background, bg2Pos, 0.0, 2.0, WHITE);
-
-    mgX -= 40 * dT;
-
-    if (mgX <= -midBackground.width * 2)
-    {
-      mgX = 0.0;
-    }
-
-    Vector2 mg1Pos{mgX, 0.0};
-    DrawTextureEx(midBackground, mg1Pos, 0.0, 2.0, WHITE);
-    Vector2 mg2Pos{mgX + midBackground.width * 2, 0.0};
-    DrawTextureEx(midBackground, mg2Pos, 0.0, 2.0, WHITE);
-
-    fgX -= 80 * dT;
-
-    if (fgX <= -foreBackground.width * 2)
-    {
-      fgX = 0.0;
-    }
-
-    Vector2 fg1Pos{fgX, 0.0};
-    DrawTextureEx(foreBackground, fg1Pos, 0.0, 2.0, WHITE);
-    Vector2 fg2Pos{fgX + foreBackground.width * 2, 0.0};
-    DrawTextureEx(foreBackground, fg2Pos, 0.0, 2.0, WHITE);
+    bgX = renderBackground(background, dT, bgX, 20);
+    mgX = renderBackground(midBackground, dT, mgX, 40);
+    fgX = renderBackground(foreBackground, dT, fgX, 80);
 
     // perform ground check
     if (isOnGround(scarfyData, windowDimensions[1]))
