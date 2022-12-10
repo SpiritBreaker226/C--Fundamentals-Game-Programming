@@ -128,6 +128,8 @@ int main()
   Texture2D foreBackground = LoadTexture("./textures/foreground.png");
   float fgX{};
 
+  bool collision{};
+
   SetTargetFPS(60);
   while (!WindowShouldClose())
   {
@@ -191,12 +193,41 @@ int main()
       nebulae[index] = updateAnimData(nebulae[index], dT, nebulaMaxFrames - 1);
     }
 
-    if (scarfyData.pos.x >= finishLine + 150)
+    for (AnimData nebula : nebulae)
+    {
+      // creates a smaller rectangle around
+      // the nebula so the hit area is not too
+      // big and thus making the game hard to do
+      float pad{50};
+      Rectangle nebRec{
+          nebula.pos.x + pad,
+          nebula.pos.y + pad,
+          nebula.rec.width - 2 * pad,
+          nebula.rec.height - 2 * pad};
+
+      Rectangle scarfyRec{
+          scarfyData.pos.x,
+          scarfyData.pos.y,
+          scarfyData.rec.width,
+          scarfyData.rec.height};
+
+      if (CheckCollisionRecs(nebRec, scarfyRec))
+      {
+        collision = true;
+      }
+    }
+
+    if (collision)
+    {
+      DrawText("Game Over!", windowDimensions[0] / 4, windowDimensions[1] / 2, 40, RED);
+    }
+    else if (scarfyData.pos.x >= finishLine + 150)
     {
       DrawText("You Win!", windowDimensions[0] / 4, windowDimensions[1] / 2, 40, WHITE);
     }
     else
     {
+
       for (int index = 0; index < sizeOfNebulae; index++)
       {
         // draw nebula
