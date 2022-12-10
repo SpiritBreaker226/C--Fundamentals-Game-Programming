@@ -88,6 +88,8 @@ int main()
     nebulae[index].pos.x = windowDimensions[0] + index * nebulaSpaceBetween;
   }
 
+  float finishLine{nebulae[sizeOfNebulae - 1].pos.x};
+
   // nebula X velocity (pixels/seconds)
   int nebVel{-200};
 
@@ -172,6 +174,9 @@ int main()
       nebulae[index].pos.x += nebVel * dT;
     }
 
+    // update finish line
+    finishLine += nebVel * dT;
+
     // update scarfy position
     scarfyData.pos.y += velocity * dT;
 
@@ -186,14 +191,21 @@ int main()
       nebulae[index] = updateAnimData(nebulae[index], dT, nebulaMaxFrames - 1);
     }
 
-    for (int index = 0; index < sizeOfNebulae; index++)
+    if (scarfyData.pos.x >= finishLine + 150)
     {
-      // draw nebula
-      DrawTextureRec(nebula, nebulae[index].rec, nebulae[index].pos, WHITE);
+      DrawText("You Win!", windowDimensions[0] / 4, windowDimensions[1] / 2, 40, WHITE);
     }
+    else
+    {
+      for (int index = 0; index < sizeOfNebulae; index++)
+      {
+        // draw nebula
+        DrawTextureRec(nebula, nebulae[index].rec, nebulae[index].pos, WHITE);
+      }
 
-    // draw scarfy
-    DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+      // draw scarfy
+      DrawTextureRec(scarfy, scarfyData.rec, scarfyData.pos, WHITE);
+    }
 
     // End Game Logic
 
