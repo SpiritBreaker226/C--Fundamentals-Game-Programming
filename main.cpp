@@ -9,6 +9,33 @@ struct AnimData
   float runningTime;
 };
 
+bool isOnGround(AnimData data, int windowHeight)
+{
+  return data.pos.y >= (windowHeight - data.rec.height);
+}
+
+AnimData updateAnimData(AnimData data, float deltaTime, int maxFrame)
+{
+  // update running time
+  data.runningTime += deltaTime;
+
+  if (data.runningTime >= data.updateTime)
+  {
+    data.runningTime = 0.0;
+
+    // update animation frame
+    data.rec.x = data.frame * data.rec.width;
+    data.frame++;
+
+    if (data.frame > maxFrame)
+    {
+      data.frame = 0;
+    }
+  }
+
+  return data;
+}
+
 int main()
 {
   // window dimensions
@@ -24,10 +51,9 @@ int main()
 
   // nebula variables
 
-  const float nebulaFrames = 8;
-
   Texture2D nebula = LoadTexture("./textures/12_nebula_spritesheet.png");
 
+  const int nebulaMaxFrames = 8;
   const int sizeOfNebulae = 6;
   const int nebulaSpaceBetween = 300;
   AnimData nebulae[sizeOfNebulae]{};
@@ -36,9 +62,9 @@ int main()
   {
     nebulae[index].rec.x = 0.0;
     nebulae[index].rec.y = 0.0;
-    nebulae[index].rec.width = nebula.width / nebulaFrames;
-    nebulae[index].rec.height = nebula.height / nebulaFrames;
-    nebulae[index].pos.y = windowDimensions[1] - nebula.height / nebulaFrames;
+    nebulae[index].rec.width = nebula.width / nebulaMaxFrames;
+    nebulae[index].rec.height = nebula.height / nebulaMaxFrames;
+    nebulae[index].pos.y = windowDimensions[1] - nebula.height / nebulaMaxFrames;
     nebulae[index].frame = 0;
     nebulae[index].runningTime = 0.0;
     nebulae[index].updateTime = 0.0;
@@ -50,10 +76,10 @@ int main()
 
   // scarfy variables
   Texture2D scarfy = LoadTexture("./textures/scarfy.png");
-  const int scarfyFrames = 6;
+  const int scarfyMaxFrames = 6;
   AnimData scarfyData{};
 
-  scarfyData.rec.width = scarfy.width / scarfyFrames;
+  scarfyData.rec.width = scarfy.width / scarfyMaxFrames;
   scarfyData.rec.height = scarfy.height;
   scarfyData.rec.x = 0;
   scarfyData.rec.y = 0;
@@ -87,7 +113,7 @@ int main()
     // Start Game Logic
 
     // perform ground check
-    if (scarfyData.pos.y >= (windowDimensions[1] - scarfyData.rec.height))
+    if (isOnGround(scarfyData, windowDimensions[1]))
     {
       // no longer in the air
       isInAir = false;
@@ -122,42 +148,12 @@ int main()
     // scarfy animation frame
     if (!isInAir)
     {
-      // update running time
-      scarfyData.runningTime += dT;
-
-      if (scarfyData.runningTime >= scarfyData.updateTime)
-      {
-        scarfyData.runningTime = 0.0;
-
-        // update animation frame
-        scarfyData.rec.x = scarfyData.frame * scarfyData.rec.width;
-        scarfyData.frame++;
-
-        if (scarfyData.frame > scarfyFrames - 1)
-        {
-          scarfyData.frame = 0;
-        }
-      }
+      scarfyData = updateAnimData(scarfyData, dT, scarfyMaxFrames - 1);
     }
 
     for (int index = 0; index < sizeOfNebulae; index++)
     {
-      // nebula animation frame
-      nebulae[index].runningTime += dT;
-
-      if (nebulae[index].runningTime >= nebulae[index].updateTime)
-      {
-        nebulae[index].runningTime = 0.0;
-
-        // update animation frame
-        nebulae[index].rec.x = nebulae[index].frame * nebulae[index].rec.width;
-        nebulae[index].frame++;
-
-        if (nebulae[index].frame > nebulaFrames - 1)
-        {
-          nebulae[index].frame = 0;
-        }
-      }
+      nebulae[index] = updateAnimData(nebulae[index], dT, nebulaMaxFrames - 1);
     }
 
     for (int index = 0; index < sizeOfNebulae; index++)
