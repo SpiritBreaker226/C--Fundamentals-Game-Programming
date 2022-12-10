@@ -12,10 +12,12 @@ struct AnimData
 int main()
 {
   // window dimensions
-  const int windowWidth{1024};
-  const int windowHeight{450};
+  int windowDimensions[2];
 
-  InitWindow(windowWidth, windowHeight, "Dapper Dasher!");
+  windowDimensions[0] = 512;
+  windowDimensions[1] = 380;
+
+  InitWindow(windowDimensions[0], windowDimensions[1], "Dapper Dasher!");
 
   // acceleration due to gravity (pixels/frame)/frame
   const int gravity{1'000};
@@ -26,18 +28,18 @@ int main()
 
   Texture2D nebula = LoadTexture("./textures/12_nebula_spritesheet.png");
   AnimData nebData{
-      {0.0, 0.0, nebula.width / nebulaFrames, nebula.height / nebulaFrames}, // Rectangle rec
-      {windowWidth, windowHeight - nebula.height / nebulaFrames},            // Vector2 pos
-      0,                                                                     // int frame
-      1.0 / 12.0,                                                            // float updateTime
-      0.0                                                                    // float runningTime
+      {0.0, 0.0, nebula.width / nebulaFrames, nebula.height / nebulaFrames},            // Rectangle rec
+      {(float)windowDimensions[0], windowDimensions[1] - nebula.height / nebulaFrames}, // Vector2 pos
+      0,                                                                                // int frame
+      1.0 / 12.0,                                                                       // float updateTime
+      0.0                                                                               // float runningTime
   };
   AnimData neb2Data{
-      {0.0, 0.0, nebula.width / nebulaFrames, nebula.height / nebulaFrames}, // Rectangle rec
-      {windowWidth + 300, windowHeight - nebula.height / nebulaFrames},      // Vector2 pos
-      0,                                                                     // int frame
-      1.0 / 16.0,                                                            // float updateTime
-      0.0                                                                    // float runningTime
+      {0.0, 0.0, nebula.width / nebulaFrames, nebula.height / nebulaFrames},                  // Rectangle rec
+      {(float)windowDimensions[0] + 300, windowDimensions[1] - nebula.height / nebulaFrames}, // Vector2 pos
+      0,                                                                                      // int frame
+      1.0 / 16.0,                                                                             // float updateTime
+      0.0                                                                                     // float runningTime
   };
 
   // nebula X velocity (pixels/seconds)
@@ -53,8 +55,8 @@ int main()
   scarfyData.rec.x = 0;
   scarfyData.rec.y = 0;
 
-  scarfyData.pos.x = windowWidth / 2 - scarfyData.rec.width / 2;
-  scarfyData.pos.y = windowHeight - scarfyData.rec.height;
+  scarfyData.pos.x = windowDimensions[0] / 2 - scarfyData.rec.width / 2;
+  scarfyData.pos.y = windowDimensions[1] - scarfyData.rec.height;
 
   scarfyData.frame = 0;
   scarfyData.runningTime = 0.0;
@@ -82,7 +84,7 @@ int main()
     // Start Game Logic
 
     // perform ground check
-    if (scarfyData.pos.y >= (windowHeight - scarfyData.rec.height))
+    if (scarfyData.pos.y >= (windowDimensions[1] - scarfyData.rec.height))
     {
       // no longer in the air
       isInAir = false;
