@@ -1,0 +1,38 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "worldmap.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "file.lastUsedOpenFilter": "All Files (*)",
+    "fileStates": {
+        "Nature RPG Tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "worldmap.tmx": {
+            "scale": 0.4787109375,
+            "selectedLayer": 5,
+            "viewCenter": {
+                "x": 317.5193798449613,
+                "y": 456.43410852713185
+            }
+        }
+    },
+    "last.imagePath": "/Users/Jason/Dev/C++/C++-Fundamentals-Game-Programming/nature_tileset",
+    "map.height": 24,
+    "map.lastUsedFormat": "tmx",
+    "map.width": 24,
+    "openFiles": [
+        "worldmap.tmx"
+    ],
+    "project": "classy-clash.tiled-project",
+    "recentFiles": [
+        "worldmap.tmx",
+        "Nature RPG Tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}
