@@ -12,6 +12,7 @@ public:
   Vector2 getWorldPos();
 
   // public methods
+  Rectangle getCollisionRec();
   void tick(float deltaTime);
   void undoMovement();
 

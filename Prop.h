@@ -8,6 +8,7 @@ public:
   Prop(Vector2 pos, Texture2D tex);
 
   // public method
+  Rectangle getCollisionRec(Vector2 characterPos);
   void Render(Vector2 characterPos);
 
 private:

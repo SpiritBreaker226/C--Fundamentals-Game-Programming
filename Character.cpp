@@ -16,6 +16,16 @@ Character::Character(int windowWidth, int windowHeight)
 
 Vector2 Character::getWorldPos() { return worldPos; }
 
+Rectangle Character::getCollisionRec()
+{
+  return Rectangle{
+      screenPos.x,
+      screenPos.y,
+      scale * width,
+      scale * height,
+  };
+}
+
 void Character::tick(float deltaTime)
 {
   worldPosLastFrame = worldPos;
