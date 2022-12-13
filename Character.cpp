@@ -6,13 +6,15 @@ Character::Character()
   height = texture.height;
 }
 
-Vector2 Character::getWorldPos() { return worldPos; }
-
-void Character::setScreenPos(int windowWidth, int windowHeight)
+Character::Character(int windowWidth, int windowHeight)
 {
-  screenPos = {(float)windowWidth / 2.0f - 4.0f * (0.5f * width),
-               (float)windowHeight / 2.0f - 4.0f * (0.5f * height)};
+  width = texture.width / maxFrames;
+  height = texture.height;
+  screenPos = {static_cast<float>(windowWidth) / 2.0f - scale * (0.5f * width),
+               static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * height)};
 }
+
+Vector2 Character::getWorldPos() { return worldPos; }
 
 void Character::tick(float deltaTime)
 {
@@ -71,8 +73,8 @@ void Character::tick(float deltaTime)
   Rectangle destRec{
       screenPos.x,
       screenPos.y,
-      4.f * width,
-      4.f * height};
+      scale * width,
+      scale * height};
 
   DrawTexturePro(texture, sourceRec, destRec, Vector2{}, 0.f, WHITE);
 }

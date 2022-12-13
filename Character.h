@@ -4,11 +4,14 @@
 class Character
 {
 public:
+  // constructors
   Character();
+  Character(int windowWidth, int windowHeight);
 
+  // getter and setters
   Vector2 getWorldPos();
 
-  void setScreenPos(int winWidth, int winHeight);
+  // public methods
   void tick(float deltaTime);
   void undoMovement();
 
@@ -25,6 +28,8 @@ private:
   float height{};
 
   float rightLeft{1.f};
+  float scale{4.f};
+
   // animation variables
   float runningTime{};
   float updateTime{1.f / 12.f};
