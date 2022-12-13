@@ -1,34 +1,18 @@
 #include "Character.h"
 
-Character::Character()
+Character::Character(int windowWidth, int windowHeight) : BaseCharacter(
+                                                              Vector2{},
+                                                              LoadTexture("./characters/knight_idle_spritesheet.png"),
+                                                              LoadTexture("./characters/knight_run_spritesheet.png"))
 {
-  width = texture.width / maxFrames;
-  height = texture.height;
-}
-
-Character::Character(int windowWidth, int windowHeight)
-{
-  width = texture.width / maxFrames;
-  height = texture.height;
   screenPos = {static_cast<float>(windowWidth) / 2.0f - scale * (0.5f * width),
                static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * height)};
 }
 
-Vector2 Character::getWorldPos() { return worldPos; }
-
-Rectangle Character::getCollisionRec()
-{
-  return Rectangle{
-      screenPos.x,
-      screenPos.y,
-      scale * width,
-      scale * height,
-  };
-}
-
 void Character::tick(float deltaTime)
 {
-  worldPosLastFrame = worldPos;
+  // set animation and last frame
+  BaseCharacter::tick(deltaTime);
 
   Vector2 direction{};
   if (IsKeyDown(KEY_A))
@@ -57,36 +41,4 @@ void Character::tick(float deltaTime)
   {
     texture = idle;
   }
-
-  runningTime += deltaTime;
-
-  if (runningTime > updateTime)
-  {
-    runningTime = 0.f;
-
-    frame++;
-
-    if (frame > maxFrames)
-    {
-      frame = 0;
-    }
-  }
-
-  // draw the character
-  Rectangle sourceRec{
-      frame * width,
-      0.f,
-      // flips the sprite by changing the value from positive to negative and back again
-      rightLeft * width,
-      height};
-
-  Rectangle destRec{
-      screenPos.x,
-      screenPos.y,
-      scale * width,
-      scale * height};
-
-  DrawTexturePro(texture, sourceRec, destRec, Vector2{}, 0.f, WHITE);
 }
-
-void Character::undoMovement() { worldPos = worldPosLastFrame; }

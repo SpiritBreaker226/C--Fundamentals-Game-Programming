@@ -22,10 +22,10 @@ int main()
   Character knight(windowWidth, windowHeight);
 
   // NPC
-  Enemy goblin{
+  Enemy goblin(
       Vector2{},
       LoadTexture("./characters/goblin_idle_spritesheet.png"),
-      LoadTexture("./characters/goblin_run_spritesheet.png")};
+      LoadTexture("./characters/goblin_run_spritesheet.png"));
 
   // Props
   Prop props[2]{
