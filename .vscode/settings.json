@@ -8,5 +8,5 @@
     "**/*.o": true,
     "**/*.exe": true
   },
-  "cSpell.words": ["scarfy"]
+  "cSpell.words": ["scarfy", "tileset"]
 }
