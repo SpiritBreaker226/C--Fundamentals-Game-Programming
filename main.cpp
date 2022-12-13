@@ -2,6 +2,7 @@
 #include "raymath.h"
 
 #include "Character.h"
+#include "Enemy.h"
 #include "Prop.h"
 
 int main()
@@ -17,8 +18,16 @@ int main()
   Vector2 mapPos{0.0, 0.0};
   const float mapScale{4.f};
 
+  // Player
   Character knight(windowWidth, windowHeight);
 
+  // NPC
+  Enemy goblin{
+      Vector2{},
+      LoadTexture("./characters/goblin_idle_spritesheet.png"),
+      LoadTexture("./characters/goblin_run_spritesheet.png")};
+
+  // Props
   Prop props[2]{
       Prop{Vector2{600.f, 300.f}, LoadTexture("./nature_tileset/Rock.png")},
       Prop{Vector2{400.f, 500.f}, LoadTexture("./nature_tileset/Log.png")}};
@@ -67,6 +76,9 @@ int main()
         knight.undoMovement();
       }
     }
+
+    // NPC
+    goblin.tick(GetFrameTime());
 
     // End Game Logic
 
