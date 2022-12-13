@@ -6,6 +6,8 @@ Character::Character()
   height = texture.height;
 }
 
+Vector2 Character::getWorldPos() { return worldPos; }
+
 void Character::setScreenPos(int windowWidth, int windowHeight)
 {
   screenPos = {(float)windowWidth / 2.0f - 4.0f * (0.5f * width),

@@ -6,7 +6,7 @@ class Character
 public:
   Character();
 
-  Vector2 getWorldPos() { return worldPos; }
+  Vector2 getWorldPos();
 
   void setScreenPos(int winWidth, int winHeight);
   void tick(float deltaTime);
