@@ -15,7 +15,9 @@ int main()
   const float speed = 4.0;
 
   const int maxFrames{6};
-  Texture2D knight = LoadTexture("./characters/knight_idle_spritesheet.png");
+  Texture2D knight_idle = LoadTexture("./characters/knight_idle_spritesheet.png");
+  Texture2D knight_run = LoadTexture("./characters/knight_run_spritesheet.png");
+  Texture2D knight = knight_idle;
   Vector2 knightPos{
       (float)windowWidth / 2.0f - 4.0f * (0.5f * (float)knight.width / maxFrames),
       (float)windowHeight / 2.0f - 4.0f * (0.5f * (float)knight.height)};
@@ -50,10 +52,16 @@ int main()
 
     if (Vector2Length(direction) != 0.0)
     {
+      knight = knight_run;
+
       // set map = mapPos - direction (or movement vector)
       mapPos = Vector2Subtract(mapPos, Vector2Scale(Vector2Normalize(direction), speed));
 
       rightLeft = direction.x < 0.f ? -1.f : 1.f;
+    }
+    else
+    {
+      knight = knight_idle;
     }
 
     // draw the map
@@ -96,7 +104,8 @@ int main()
   }
 
   UnloadTexture(map);
-  UnloadTexture(knight);
+  UnloadTexture(knight_idle);
+  UnloadTexture(knight_run);
 
   CloseWindow();
 }
