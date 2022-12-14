@@ -12,6 +12,8 @@ public:
   // constructors
   Character(int winWidth, int winHeight);
 
+  Rectangle getWeaponCollisionRec() const { return weaponCollisionRec; };
+
   // public methods
   virtual void tick(float deltaTime) override;
   virtual Vector2 getScreenPos() override;

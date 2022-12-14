@@ -11,7 +11,7 @@ public:
   BaseCharacter(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
 
   // getter and setters
-  Vector2 getWorldPos();
+  Vector2 getWorldPos() const { return worldPos; };
 
   // public methods
   Rectangle getCollisionRec();

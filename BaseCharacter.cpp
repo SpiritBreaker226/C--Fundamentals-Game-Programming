@@ -15,8 +15,6 @@ BaseCharacter::BaseCharacter(Vector2 pos, Texture2D idle_texture, Texture2D run_
   height = texture.height;
 }
 
-Vector2 BaseCharacter::getWorldPos() { return worldPos; }
-
 Rectangle BaseCharacter::getCollisionRec()
 {
   return Rectangle{
