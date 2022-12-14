@@ -12,6 +12,10 @@ public:
   // constructors
   Character(int winWidth, int winHeight);
 
+  // getter and setters
+  float getHealth() const { return health; };
+  void takeDamage(float damage);
+
   Rectangle getWeaponCollisionRec() const { return weaponCollisionRec; };
 
   // public methods
@@ -24,6 +28,8 @@ private:
 
   Texture2D weapon{LoadTexture("./characters/weapon_sword.png")};
   Rectangle weaponCollisionRec{};
+
+  float health{100.f};
 };
 
 #endif
