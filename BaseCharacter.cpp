@@ -60,6 +60,28 @@ void BaseCharacter::tick(float deltaTime)
       scale * width,
       scale * height};
 
+  if (Vector2Length(velocity) != 0.0)
+  {
+    texture = run;
+
+    // set worldPos = worldPos + velocity (or movement vector)
+    // the vector in the character is reflects its position so it is a positive since
+    // the character moves in the velocity that the user/game wants that character to go.
+    // This allows the character to apply to other non=plater characters to use the same
+    // class since the world does not revolves around them.
+    worldPos = Vector2Add(worldPos, Vector2Scale(Vector2Normalize(velocity), speed));
+
+    rightLeft = velocity.x < 0.f ? -1.f : 1.f;
+  }
+  else
+  {
+    texture = idle;
+  }
+
+  // resets the velocity so that it does not add or subtract
+  // in either player or NPC classes since it must be 1 or -1
+  velocity = {};
+
   DrawTexturePro(texture, sourceRec, destRec, Vector2{}, 0.f, WHITE);
 }
 

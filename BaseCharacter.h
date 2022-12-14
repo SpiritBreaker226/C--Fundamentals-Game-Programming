@@ -2,6 +2,7 @@
 #define BASE_CHARACTER_H
 
 #include "raylib.h"
+#include "raymath.h"
 
 class BaseCharacter
 {
@@ -36,6 +37,7 @@ protected:
   float runningTime{};
   float updateTime{1.f / 12.f};
   float speed{4.f};
+  Vector2 velocity{};
   float frame{};
   int maxFrames{6};
 

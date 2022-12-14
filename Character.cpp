@@ -13,34 +13,15 @@ Vector2 Character::getScreenPos() { return screenPos; }
 
 void Character::tick(float deltaTime)
 {
+  if (IsKeyDown(KEY_A))
+    velocity.x -= 1.0;
+  if (IsKeyDown(KEY_D))
+    velocity.x += 1.0;
+  if (IsKeyDown(KEY_W))
+    velocity.y -= 1.0;
+  if (IsKeyDown(KEY_S))
+    velocity.y += 1.0;
+
   // set animation and last frame
   BaseCharacter::tick(deltaTime);
-
-  Vector2 direction{};
-  if (IsKeyDown(KEY_A))
-    direction.x -= 1.0;
-  if (IsKeyDown(KEY_D))
-    direction.x += 1.0;
-  if (IsKeyDown(KEY_W))
-    direction.y -= 1.0;
-  if (IsKeyDown(KEY_S))
-    direction.y += 1.0;
-
-  if (Vector2Length(direction) != 0.0)
-  {
-    texture = run;
-
-    // set worldPos = worldPos + direction (or movement vector)
-    // the vector in the character is reflects its position so it is a positive since
-    // the character moves in the direction that the user/game wants that character to go.
-    // This allows the character to apply to other non=plater characters to use the same
-    // class since the world does not revolves around them.
-    worldPos = Vector2Add(worldPos, Vector2Scale(Vector2Normalize(direction), speed));
-
-    rightLeft = direction.x < 0.f ? -1.f : 1.f;
-  }
-  else
-  {
-    texture = idle;
-  }
 }
