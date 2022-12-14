@@ -15,17 +15,17 @@ public:
 
   // public methods
   Rectangle getCollisionRec();
+  virtual Vector2 getScreenPos() = 0;
   virtual void tick(float deltaTime);
   void undoMovement();
 
 protected:
-  Vector2 screenPos{};
   Vector2 worldPos{};
   Vector2 worldPosLastFrame{};
 
-  Texture2D texture{};
-  Texture2D idle{};
-  Texture2D run{};
+  Texture2D texture{LoadTexture("./characters/knight_idle_spritesheet.png")};
+  Texture2D idle{LoadTexture("./characters/knight_idle_spritesheet.png")};
+  Texture2D run{LoadTexture("./characters/knight_run_spritesheet.png")};
 
   float width{};
   float height{};

@@ -20,8 +20,8 @@ Vector2 BaseCharacter::getWorldPos() { return worldPos; }
 Rectangle BaseCharacter::getCollisionRec()
 {
   return Rectangle{
-      screenPos.x,
-      screenPos.y,
+      getScreenPos().x,
+      getScreenPos().y,
       scale * width,
       scale * height,
   };
@@ -55,8 +55,8 @@ void BaseCharacter::tick(float deltaTime)
       height};
 
   Rectangle destRec{
-      screenPos.x,
-      screenPos.y,
+      getScreenPos().x,
+      getScreenPos().y,
       scale * width,
       scale * height};
 

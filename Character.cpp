@@ -1,15 +1,14 @@
 #include "Character.h"
 
-Character::Character(int windowWidth, int windowHeight) : BaseCharacter(
-                                                              Vector2{},
-                                                              LoadTexture("./characters/knight_idle_spritesheet.png"),
-                                                              LoadTexture("./characters/knight_run_spritesheet.png"))
+Character::Character(int winWidth, int winHeight) : windowWidth(winWidth), windowHeight(winHeight)
 {
-  screenPos = {static_cast<float>(windowWidth) / 2.0f - scale * (0.5f * width),
-               static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * height)};
 }
 
-Vector2 Character::getScreenPos() { return screenPos; }
+Vector2 Character::getScreenPos()
+{
+  return Vector2{static_cast<float>(windowWidth) / 2.0f - scale * (0.5f * width),
+                 static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * height)};
+}
 
 void Character::tick(float deltaTime)
 {
