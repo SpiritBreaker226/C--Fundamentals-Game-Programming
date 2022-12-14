@@ -71,6 +71,4 @@ void Character::tick(float deltaTime)
   Rectangle weaponDest{getScreenPos().x + weaponOffset.x, getScreenPos().y + weaponOffset.y, weapon.width * scale, weapon.height * scale};
 
   DrawTexturePro(weapon, weaponSource, weaponDest, weaponOrigin, weaponRotation, WHITE);
-
-  DrawRectangleLines(weaponCollisionRec.x, weaponCollisionRec.y, weaponCollisionRec.width, weaponCollisionRec.height, RED);
 }
