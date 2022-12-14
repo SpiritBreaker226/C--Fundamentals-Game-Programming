@@ -6,6 +6,8 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) : BaseC
 {
 }
 
+void Enemy::setTarget(Character *character) { target = character; }
+
 void Enemy::tick(float deltaTime)
 {
   BaseCharacter::tick(deltaTime);

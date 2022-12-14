@@ -1,3 +1,6 @@
+#ifndef CHARACTER_H
+#define CHARACTER_H
+
 #include "raylib.h"
 #include "raymath.h"
 
@@ -14,3 +17,5 @@ public:
 
 private:
 };
+
+#endif
