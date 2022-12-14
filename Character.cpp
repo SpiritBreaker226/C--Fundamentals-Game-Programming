@@ -23,4 +23,39 @@ void Character::tick(float deltaTime)
 
   // set animation and last frame
   BaseCharacter::tick(deltaTime);
+
+  Vector2 weaponOrigin{};
+  Vector2 weaponOffset{};
+  float weaponRotation{};
+
+  if (rightLeft > 0.f)
+  {
+    weaponOrigin = {0.f, weapon.height * scale};
+    weaponOffset = {35.f, 55.f};
+    weaponCollisionRec = {
+        getScreenPos().x + weaponOffset.x,
+        getScreenPos().y + weaponOffset.y - weapon.height * scale,
+        weapon.width * scale,
+        weapon.height * scale};
+    weaponRotation = 35.f;
+  }
+  else
+  {
+    weaponOrigin = {weapon.width * scale, weapon.height * scale};
+    weaponOffset = {25.f, 55.f};
+    weaponCollisionRec = {
+        getScreenPos().x + weaponOffset.x - weapon.width * scale,
+        getScreenPos().y + weaponOffset.y - weapon.height * scale,
+        weapon.width * scale,
+        weapon.height * scale};
+    weaponRotation = -35.f;
+  }
+
+  // draw the sword
+  Rectangle weaponSource{0.f, 0.f, static_cast<float>(weapon.width) * rightLeft, static_cast<float>(weapon.height)};
+  Rectangle weaponDest{getScreenPos().x + weaponOffset.x, getScreenPos().y + weaponOffset.y, weapon.width * scale, weapon.height * scale};
+
+  DrawTexturePro(weapon, weaponSource, weaponDest, weaponOrigin, weaponRotation, WHITE);
+
+  DrawRectangleLines(weaponCollisionRec.x, weaponCollisionRec.y, weaponCollisionRec.width, weaponCollisionRec.height, RED);
 }
