@@ -31,6 +31,7 @@ int main()
       "./characters/goblin_run_spritesheet.png",
       "./characters/slime_run_spritesheet.png"};
   const int sizeOfEnemies = 6;
+  int numberOfEnemiesAlive = sizeOfEnemies;
   Enemy *enemies[sizeOfEnemies];
 
   for (int index = 0; index < sizeOfEnemies; index++)
@@ -68,6 +69,14 @@ int main()
     for (auto prop : props)
     {
       prop.Render(knight.getWorldPos());
+    }
+
+    if (numberOfEnemiesAlive == 0)
+    {
+      DrawText("You Won!", 55.f, 45.f, 40, WHITE);
+
+      EndDrawing();
+      continue;
     }
 
     // checks if the knight is alive
@@ -120,6 +129,7 @@ int main()
         if (CheckCollisionRecs(enemy->getCollisionRec(), knight.getWeaponCollisionRec()))
         {
           enemy->setAlive(false);
+          numberOfEnemiesAlive--;
         }
       }
     }
