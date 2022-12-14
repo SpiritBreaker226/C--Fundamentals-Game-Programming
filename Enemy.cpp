@@ -10,5 +10,7 @@ void Enemy::setTarget(Character *character) { target = character; }
 
 void Enemy::tick(float deltaTime)
 {
+  screenPos = Vector2Subtract(worldPos, target->getWorldPos());
+
   BaseCharacter::tick(deltaTime);
 }
