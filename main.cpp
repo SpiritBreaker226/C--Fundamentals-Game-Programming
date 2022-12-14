@@ -24,16 +24,26 @@ int main()
   // Player
   Character knight(windowWidth, windowHeight);
 
-  // NPC
-  Enemy goblin(
-      Vector2{},
-      LoadTexture("./characters/goblin_idle_spritesheet.png"),
-      LoadTexture("./characters/goblin_run_spritesheet.png"));
+  std::string idle[]{
+      "./characters/goblin_idle_spritesheet.png",
+      "./characters/slime_idle_spritesheet.png"};
+  std::string run[]{
+      "./characters/goblin_run_spritesheet.png",
+      "./characters/slime_run_spritesheet.png"};
+  const int sizeOfEnemies = 6;
+  Enemy *enemies[sizeOfEnemies];
 
-  goblin.setTarget(&knight);
+  for (int index = 0; index < sizeOfEnemies; index++)
+  {
+    enemies[index] = new Enemy(Vector2{static_cast<float>(index * 1000), static_cast<float>(index * 500)},
+                               LoadTexture(idle[index % 2].c_str()),
+                               LoadTexture(run[index % 2].c_str()));
+
+    enemies[index]->setTarget(&knight);
+  }
 
   // Props
-  Prop props[2]{
+  Prop props[]{
       Prop{Vector2{600.f, 300.f}, LoadTexture("./nature_tileset/Rock.png")},
       Prop{Vector2{400.f, 500.f}, LoadTexture("./nature_tileset/Log.png")}};
 
@@ -101,14 +111,16 @@ int main()
       }
     }
 
-    // NPC
-    goblin.tick(GetFrameTime());
-
-    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+    for (auto enemy : enemies)
     {
-      if (CheckCollisionRecs(goblin.getCollisionRec(), knight.getWeaponCollisionRec()))
+      enemy->tick(GetFrameTime());
+
+      if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
       {
-        goblin.setAlive(false);
+        if (CheckCollisionRecs(enemy->getCollisionRec(), knight.getWeaponCollisionRec()))
+        {
+          enemy->setAlive(false);
+        }
       }
     }
 
