@@ -12,6 +12,9 @@ public:
   // constructors
   Character(int windowWidth, int windowHeight);
 
+  // getters and setters
+  Vector2 getScreenPos();
+
   // public methods
   virtual void tick(float deltaTime) override;
 

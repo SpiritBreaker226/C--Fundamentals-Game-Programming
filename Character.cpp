@@ -9,6 +9,8 @@ Character::Character(int windowWidth, int windowHeight) : BaseCharacter(
                static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * height)};
 }
 
+Vector2 Character::getScreenPos() { return screenPos; }
+
 void Character::tick(float deltaTime)
 {
   // set animation and last frame
