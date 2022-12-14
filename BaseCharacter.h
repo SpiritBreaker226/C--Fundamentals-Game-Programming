@@ -12,6 +12,8 @@ public:
 
   // getter and setters
   Vector2 getWorldPos() const { return worldPos; };
+  bool getAlive() const { return alive; };
+  void setAlive(bool isAlive) { alive = isAlive; };
 
   // public methods
   Rectangle getCollisionRec();
@@ -42,6 +44,7 @@ protected:
   int maxFrames{6};
 
 private:
+  bool alive{true};
 };
 
 #endif
