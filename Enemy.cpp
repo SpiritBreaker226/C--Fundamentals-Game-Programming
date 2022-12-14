@@ -21,6 +21,11 @@ void Enemy::tick(float deltaTime)
 
   velocity = Vector2Subtract(target->getScreenPos(), getScreenPos());
 
+  if (Vector2Length(velocity) < radius)
+  {
+    velocity = Vector2{};
+  }
+
   BaseCharacter::tick(deltaTime);
 
   if (CheckCollisionRecs(getCollisionRec(), target->getCollisionRec()))
